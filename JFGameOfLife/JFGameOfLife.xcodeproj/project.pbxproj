@@ -33,6 +33,13 @@
 		88DAB1A31A903B2F002F420A /* ships-c6.lif in Resources */ = {isa = PBXBuildFile; fileRef = 88DAB19E1A903B2F002F420A /* ships-c6.lif */; };
 		88DAB1A41A903B2F002F420A /* ships-c6d.lif in Resources */ = {isa = PBXBuildFile; fileRef = 88DAB19F1A903B2F002F420A /* ships-c6d.lif */; };
 		88DAB1A51A903B2F002F420A /* ships-c7d.lif in Resources */ = {isa = PBXBuildFile; fileRef = 88DAB1A01A903B2F002F420A /* ships-c7d.lif */; };
+		88E9DA231A90401700F8055E /* 2020202.lif in Resources */ = {isa = PBXBuildFile; fileRef = 88E9DA1C1A90401700F8055E /* 2020202.lif */; };
+		88E9DA241A90401700F8055E /* 4347826.lif in Resources */ = {isa = PBXBuildFile; fileRef = 88E9DA1D1A90401700F8055E /* 4347826.lif */; };
+		88E9DA251A90401700F8055E /* 5333333.lif in Resources */ = {isa = PBXBuildFile; fileRef = 88E9DA1E1A90401700F8055E /* 5333333.lif */; };
+		88E9DA261A90401700F8055E /* 7142857.lif in Resources */ = {isa = PBXBuildFile; fileRef = 88E9DA1F1A90401700F8055E /* 7142857.lif */; };
+		88E9DA271A90401700F8055E /* 7500000.lif in Resources */ = {isa = PBXBuildFile; fileRef = 88E9DA201A90401700F8055E /* 7500000.lif */; };
+		88E9DA281A90401700F8055E /* 8000000.lif in Resources */ = {isa = PBXBuildFile; fileRef = 88E9DA211A90401700F8055E /* 8000000.lif */; };
+		88E9DA291A90401700F8055E /* 8750000.lif in Resources */ = {isa = PBXBuildFile; fileRef = 88E9DA221A90401700F8055E /* 8750000.lif */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,6 +83,13 @@
 		88DAB19E1A903B2F002F420A /* ships-c6.lif */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "ships-c6.lif"; sourceTree = "<group>"; };
 		88DAB19F1A903B2F002F420A /* ships-c6d.lif */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "ships-c6d.lif"; sourceTree = "<group>"; };
 		88DAB1A01A903B2F002F420A /* ships-c7d.lif */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "ships-c7d.lif"; sourceTree = "<group>"; };
+		88E9DA1C1A90401700F8055E /* 2020202.lif */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 2020202.lif; sourceTree = "<group>"; };
+		88E9DA1D1A90401700F8055E /* 4347826.lif */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 4347826.lif; sourceTree = "<group>"; };
+		88E9DA1E1A90401700F8055E /* 5333333.lif */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 5333333.lif; sourceTree = "<group>"; };
+		88E9DA1F1A90401700F8055E /* 7142857.lif */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 7142857.lif; sourceTree = "<group>"; };
+		88E9DA201A90401700F8055E /* 7500000.lif */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 7500000.lif; sourceTree = "<group>"; };
+		88E9DA211A90401700F8055E /* 8000000.lif */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 8000000.lif; sourceTree = "<group>"; };
+		88E9DA221A90401700F8055E /* 8750000.lif */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 8750000.lif; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -162,6 +176,13 @@
 		88DAB17D1A8FAD86002F420A /* initialStates */ = {
 			isa = PBXGroup;
 			children = (
+				88E9DA1C1A90401700F8055E /* 2020202.lif */,
+				88E9DA1D1A90401700F8055E /* 4347826.lif */,
+				88E9DA1E1A90401700F8055E /* 5333333.lif */,
+				88E9DA1F1A90401700F8055E /* 7142857.lif */,
+				88E9DA201A90401700F8055E /* 7500000.lif */,
+				88E9DA211A90401700F8055E /* 8000000.lif */,
+				88E9DA221A90401700F8055E /* 8750000.lif */,
 				88DAB19C1A903B2F002F420A /* ships-2c7.lif */,
 				88DAB19D1A903B2F002F420A /* ships-c5d.lif */,
 				88DAB19E1A903B2F002F420A /* ships-c6.lif */,
@@ -266,21 +287,28 @@
 				88DAB18A1A8FAD86002F420A /* gun-corder-p690.lif in Resources */,
 				88DAB1A21A903B2F002F420A /* ships-c5d.lif in Resources */,
 				88D567E11A8C443E0025E18C /* LaunchScreen.xib in Resources */,
+				88E9DA251A90401700F8055E /* 5333333.lif in Resources */,
 				88DAB1911A8FAD86002F420A /* gun-p432.lif in Resources */,
 				88D567DE1A8C443E0025E18C /* Images.xcassets in Resources */,
+				88E9DA231A90401700F8055E /* 2020202.lif in Resources */,
 				88D567D51A8C443E0025E18C /* GameScene.sks in Resources */,
 				88DAB1A11A903B2F002F420A /* ships-2c7.lif in Resources */,
 				88DAB1A51A903B2F002F420A /* ships-c7d.lif in Resources */,
 				88DAB1A41A903B2F002F420A /* ships-c6d.lif in Resources */,
+				88E9DA281A90401700F8055E /* 8000000.lif in Resources */,
 				88DAB1A31A903B2F002F420A /* ships-c6.lif in Resources */,
 				88DAB18C1A8FAD86002F420A /* gun-p135.lif in Resources */,
+				88E9DA261A90401700F8055E /* 7142857.lif in Resources */,
 				88DAB1891A8FAD86002F420A /* edgeshoot-p450.lif in Resources */,
 				88DAB1921A8FAD86002F420A /* gun-p570.lif in Resources */,
 				88DAB1931A8FAD86002F420A /* sidecargun.lif in Resources */,
 				88D567DC1A8C443E0025E18C /* Main.storyboard in Resources */,
 				88DAB1901A8FAD86002F420A /* gun-p22p.lif in Resources */,
 				88DAB18E1A8FAD86002F420A /* gun-p165mwss.lif in Resources */,
+				88E9DA271A90401700F8055E /* 7500000.lif in Resources */,
 				88DAB18F1A8FAD86002F420A /* gun-p180.lif in Resources */,
+				88E9DA291A90401700F8055E /* 8750000.lif in Resources */,
+				88E9DA241A90401700F8055E /* 4347826.lif in Resources */,
 				88DAB18D1A8FAD86002F420A /* gun-p150.lif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

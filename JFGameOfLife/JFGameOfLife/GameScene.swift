@@ -18,7 +18,6 @@ class GameScene: SKScene {
     let cellResolution:CGFloat = 2.0
     
     override func didMoveToView(view: SKView) {
-        self.anchorPoint = CGPoint(x: 0.5, y: 0.5)
         sprite.xScale = cellResolution
         sprite.yScale = cellResolution
     }
@@ -29,8 +28,14 @@ class GameScene: SKScene {
    
     override func update(currentTime: CFTimeInterval) {
         if lastUpdatedAtTime < 0.0 {
-            if let importedBoard = RLEReader().buildBoard("gun-p165mwss") {
+            if let importedBoard = RLEReader().buildBoard("ships-c6d") {
+                println("my size is \(self.size)")
+                println("my anchor pointis \(self.anchorPoint)")
                 println("Lower Left: \(importedBoard.matrix.minCol), \(importedBoard.matrix.minRow)  Upper Right \(importedBoard.matrix.maxCol), \(importedBoard.matrix.maxRow)")
+                
+                var width  = Int(2*cellResolution)*(importedBoard.matrix.maxCol - importedBoard.matrix.minCol)
+                var height = Int(2*cellResolution)*(importedBoard.matrix.maxRow - importedBoard.matrix.minRow)
+                self.size  = CGSize(width: width, height: height)
                 
                 engine.swap(importedBoard)
                 draw(engine.currentBoard, currentTime: currentTime)
@@ -49,8 +54,6 @@ class GameScene: SKScene {
     
     func draw(board: GameOfLifeBoard, currentTime: CFTimeInterval) -> Void {
         lastUpdatedAtTime = currentTime
-//        println(board.matrix)
-        
         self.removeAllChildren()
         for (index, cell) in board.matrix {
             if cell.state == CellState.Alive {
