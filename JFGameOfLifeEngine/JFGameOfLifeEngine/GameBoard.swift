@@ -46,8 +46,10 @@ public class GameBoard<MatrixType: Matrix> {
         }
         
         var rules = state == CellState.Alive ? aliveRuleSet : deadRuleSet
+        var numAlive = Rule().aliveNeighbors(index, matrix: matrix)
+        
         for rule in rules {
-            var ruling = rule.apply(index, matrix: matrix)
+            var ruling = rule.apply(index, matrix: matrix, numAliveNeighbors: numAlive)
             if ruling != CellState.Unaffected {
                 return ruling
             }

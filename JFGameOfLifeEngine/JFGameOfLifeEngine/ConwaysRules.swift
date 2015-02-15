@@ -15,26 +15,25 @@ public struct ConwaysRules {
 }
 
 public class FewerThanTwoLiveNeighbors : Rule {
-    public override func apply(index: SparseIndex, matrix: Matrix) -> CellState {
-        return aliveNeighbors(index, matrix: matrix) < 2 ? CellState.Dead : CellState.Unaffected
+    public override func apply(index: SparseIndex, matrix: Matrix, numAliveNeighbors: Int) -> CellState {
+        return numAliveNeighbors < 2 ? CellState.Dead : CellState.Unaffected
     }
 }
 
 public class TwoOrThreeLiveNeighbors : Rule {
-    public override func apply(index: SparseIndex, matrix: Matrix) -> CellState {
-        let alive = aliveNeighbors(index, matrix: matrix)
-        return alive == 2 || alive == 3 ? CellState.Alive : CellState.Unaffected
+    public override func apply(index: SparseIndex, matrix: Matrix, numAliveNeighbors: Int) -> CellState {
+        return numAliveNeighbors == 2 || numAliveNeighbors == 3 ? CellState.Alive : CellState.Unaffected
     }
 }
 
 public class MoreThanThreeLiveNeighbors : Rule {
-    public override func apply(index: SparseIndex, matrix: Matrix) -> CellState {
-        return aliveNeighbors(index, matrix: matrix) > 3 ? CellState.Dead : CellState.Unaffected
+    public override func apply(index: SparseIndex, matrix: Matrix, numAliveNeighbors: Int) -> CellState {
+        return numAliveNeighbors > 3 ? CellState.Dead : CellState.Unaffected
     }
 }
 
 public class ExactlyThreeLiveNeighbors : Rule {
-    public override func apply(index: SparseIndex, matrix: Matrix) -> CellState {
-        return aliveNeighbors(index, matrix: matrix) == 3 ? CellState.Alive : CellState.Unaffected
+    public override func apply(index: SparseIndex, matrix: Matrix, numAliveNeighbors: Int) -> CellState {
+        return numAliveNeighbors == 3 ? CellState.Alive : CellState.Unaffected
     }
 }

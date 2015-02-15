@@ -14,12 +14,16 @@ class GameScene: SKScene {
     var lastUpdatedAtTime:CFTimeInterval = -1.0
     var engine = GameOfLifeEngine()
     
+    let boardNode = SKNode()
     let sprite = SKSpriteNode(imageNamed: "Cell.png")
-    let cellResolution:CGFloat = 2.0
+
+    var boardXScale:CGFloat = 1.0
+    var boardYScale:CGFloat = 1.0
     
     override func didMoveToView(view: SKView) {
-        sprite.xScale = cellResolution
-        sprite.yScale = cellResolution
+        boardNode.xScale = boardXScale
+        boardNode.yScale = boardYScale
+        self.addChild(boardNode)
     }
     
     override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
@@ -27,39 +31,26 @@ class GameScene: SKScene {
     }
    
     override func update(currentTime: CFTimeInterval) {
-        if lastUpdatedAtTime < 0.0 {
-            if let importedBoard = RLEReader().buildBoard("ships-c6d") {
-                println("my size is \(self.size)")
-                println("my anchor pointis \(self.anchorPoint)")
-                println("Lower Left: \(importedBoard.matrix.minCol), \(importedBoard.matrix.minRow)  Upper Right \(importedBoard.matrix.maxCol), \(importedBoard.matrix.maxRow)")
-                
-                var width  = Int(2*cellResolution)*(importedBoard.matrix.maxCol - importedBoard.matrix.minCol)
-                var height = Int(2*cellResolution)*(importedBoard.matrix.maxRow - importedBoard.matrix.minRow)
-                self.size  = CGSize(width: width, height: height)
-                
-                engine.swap(importedBoard)
-                draw(engine.currentBoard, currentTime: currentTime)
-            }
-            else {
-                engine.swap(GameBoard(matrix: Matrix(), aliveRuleSet: [], deadRuleSet: []))
-            }
-        }
-        else {
-            if currentTime - lastUpdatedAtTime > 0.1 {
-                engine.swap(engine.step())
-                draw(engine.currentBoard, currentTime: currentTime)
-            }
+        if currentTime - lastUpdatedAtTime > 0.0333 {
+            engine.swap(engine.step())
+            draw(engine.currentBoard, currentTime: currentTime)
         }
     }
     
     func draw(board: GameOfLifeBoard, currentTime: CFTimeInterval) -> Void {
         lastUpdatedAtTime = currentTime
-        self.removeAllChildren()
+        boardNode.removeAllChildren()
+        
+        var board = engine.currentBoard
+        var cols  = (board.matrix.maxCol - board.matrix.minCol)
+        var rows = (board.matrix.maxRow - board.matrix.minRow)
+        self.size = CGSize(width: rows, height: cols)
+        
         for (index, cell) in board.matrix {
             if cell.state == CellState.Alive {
                 var cellNode = sprite.copy() as SKSpriteNode
-                cellNode.position = CGPoint(x: CGFloat(index.row)*cellResolution, y: CGFloat(index.col)*cellResolution)
-                self.addChild(cellNode)
+                cellNode.position = CGPoint(x: CGFloat(index.row), y: CGFloat(index.col))
+                boardNode.addChild(cellNode)
             }
         }
     }

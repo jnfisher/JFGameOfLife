@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		88823BAB1A912A5C00C6C4AD /* gosper-glider-gun.lif in Resources */ = {isa = PBXBuildFile; fileRef = 88823BAA1A912A5C00C6C4AD /* gosper-glider-gun.lif */; };
+		88823BAF1A91356500C6C4AD /* big-glider-tagalongs.lif in Resources */ = {isa = PBXBuildFile; fileRef = 88823BAE1A91356500C6C4AD /* big-glider-tagalongs.lif */; };
+		88823BB11A91361100C6C4AD /* glider2lwss-stable.lif in Resources */ = {isa = PBXBuildFile; fileRef = 88823BB01A91361100C6C4AD /* glider2lwss-stable.lif */; };
+		88823BB31A91378700C6C4AD /* gunstar-216.lif in Resources */ = {isa = PBXBuildFile; fileRef = 88823BB21A91378700C6C4AD /* gunstar-216.lif */; };
 		88D567D31A8C443E0025E18C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D567D21A8C443E0025E18C /* AppDelegate.swift */; };
 		88D567D51A8C443E0025E18C /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 88D567D41A8C443E0025E18C /* GameScene.sks */; };
 		88D567D71A8C443E0025E18C /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D567D61A8C443E0025E18C /* GameScene.swift */; };
@@ -53,6 +57,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		88823BAA1A912A5C00C6C4AD /* gosper-glider-gun.lif */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "gosper-glider-gun.lif"; sourceTree = "<group>"; };
+		88823BAE1A91356500C6C4AD /* big-glider-tagalongs.lif */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "big-glider-tagalongs.lif"; sourceTree = "<group>"; };
+		88823BB01A91361100C6C4AD /* glider2lwss-stable.lif */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "glider2lwss-stable.lif"; sourceTree = "<group>"; };
+		88823BB21A91378700C6C4AD /* gunstar-216.lif */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "gunstar-216.lif"; sourceTree = "<group>"; };
 		88D567CD1A8C443E0025E18C /* JFGameOfLife.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JFGameOfLife.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		88D567D11A8C443E0025E18C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		88D567D21A8C443E0025E18C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -176,6 +184,10 @@
 		88DAB17D1A8FAD86002F420A /* initialStates */ = {
 			isa = PBXGroup;
 			children = (
+				88823BB21A91378700C6C4AD /* gunstar-216.lif */,
+				88823BB01A91361100C6C4AD /* glider2lwss-stable.lif */,
+				88823BAE1A91356500C6C4AD /* big-glider-tagalongs.lif */,
+				88823BAA1A912A5C00C6C4AD /* gosper-glider-gun.lif */,
 				88E9DA1C1A90401700F8055E /* 2020202.lif */,
 				88E9DA1D1A90401700F8055E /* 4347826.lif */,
 				88E9DA1E1A90401700F8055E /* 5333333.lif */,
@@ -290,6 +302,7 @@
 				88E9DA251A90401700F8055E /* 5333333.lif in Resources */,
 				88DAB1911A8FAD86002F420A /* gun-p432.lif in Resources */,
 				88D567DE1A8C443E0025E18C /* Images.xcassets in Resources */,
+				88823BB11A91361100C6C4AD /* glider2lwss-stable.lif in Resources */,
 				88E9DA231A90401700F8055E /* 2020202.lif in Resources */,
 				88D567D51A8C443E0025E18C /* GameScene.sks in Resources */,
 				88DAB1A11A903B2F002F420A /* ships-2c7.lif in Resources */,
@@ -298,12 +311,15 @@
 				88E9DA281A90401700F8055E /* 8000000.lif in Resources */,
 				88DAB1A31A903B2F002F420A /* ships-c6.lif in Resources */,
 				88DAB18C1A8FAD86002F420A /* gun-p135.lif in Resources */,
+				88823BAF1A91356500C6C4AD /* big-glider-tagalongs.lif in Resources */,
 				88E9DA261A90401700F8055E /* 7142857.lif in Resources */,
 				88DAB1891A8FAD86002F420A /* edgeshoot-p450.lif in Resources */,
+				88823BAB1A912A5C00C6C4AD /* gosper-glider-gun.lif in Resources */,
 				88DAB1921A8FAD86002F420A /* gun-p570.lif in Resources */,
 				88DAB1931A8FAD86002F420A /* sidecargun.lif in Resources */,
 				88D567DC1A8C443E0025E18C /* Main.storyboard in Resources */,
 				88DAB1901A8FAD86002F420A /* gun-p22p.lif in Resources */,
+				88823BB31A91378700C6C4AD /* gunstar-216.lif in Resources */,
 				88DAB18E1A8FAD86002F420A /* gun-p165mwss.lif in Resources */,
 				88E9DA271A90401700F8055E /* 7500000.lif in Resources */,
 				88DAB18F1A8FAD86002F420A /* gun-p180.lif in Resources */,

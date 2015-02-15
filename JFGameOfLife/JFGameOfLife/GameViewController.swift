@@ -8,6 +8,8 @@
 
 import UIKit
 import SpriteKit
+import JFSparseMatrix
+import JFGameOfLifeEngine
 
 extension SKNode {
     class func unarchiveFromFile(file : NSString) -> SKNode? {
@@ -26,7 +28,6 @@ extension SKNode {
 }
 
 class GameViewController: UIViewController {
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -40,7 +41,15 @@ class GameViewController: UIViewController {
             skView.ignoresSiblingOrder = true
             
             /* Set the scale mode to scale to fit the window */
-            scene.scaleMode = .AspectFill
+            scene.scaleMode = .AspectFit
+            
+                if let importedBoard = RLEReader().buildBoard("gosper-glider-gun") {
+                    scene.engine.swap(importedBoard)
+                }
+                else {
+                    scene.engine.swap(GameBoard(matrix: Matrix(), aliveRuleSet: [], deadRuleSet: []))
+                }
+            
             
             skView.presentScene(scene)
         }

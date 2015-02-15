@@ -59,7 +59,7 @@ public class RLEReader {
                                 else if char == "o" {
                                     for i in 0..<repeatCount {
 //                                        print("(\(currentRow), \(currentColumn)) ")
-                                        matrix[currentRow, currentColumn++] = Cell(state: CellState.Alive)
+                                        matrix[currentColumn++, currentRow] = Cell(state: CellState.Alive)
                                     }
                                 }
                                 
@@ -68,7 +68,7 @@ public class RLEReader {
                             else {
                                 if char == "o" {
 //                                    print("(\(currentRow), \(currentColumn)) ")
-                                    matrix[currentRow, currentColumn++] = Cell(state: CellState.Alive)
+                                    matrix[currentColumn++, currentRow] = Cell(state: CellState.Alive)
                                 }
                                 else if char == "b" {
                                     currentColumn++

@@ -16,11 +16,11 @@ public enum CellState {
 }
 
 public protocol ApplicableRule {
-    func apply(index: SparseIndex, matrix: Matrix) -> CellState
+    func apply(index: SparseIndex, matrix: Matrix, numAliveNeighbors: Int) -> CellState
 }
 
 public class Rule : ApplicableRule {
-    public func apply(index: SparseIndex, matrix: Matrix) -> CellState {
+    public func apply(index: SparseIndex, matrix: Matrix, numAliveNeighbors: Int) -> CellState {
         return CellState.Unaffected
     }
     
