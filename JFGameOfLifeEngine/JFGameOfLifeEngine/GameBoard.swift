@@ -9,24 +9,24 @@
 import Foundation
 import JFSparseMatrix
 
-public func buildMatrix(array: Array<(Int, Int, String)>) -> SparseMatrix<Cell> {
+public func buildMatrix(_ array: Array<(Int, Int, String)>) -> SparseMatrix<Cell> {
     var matrix = SparseMatrix<Cell>()
     for a in array {
         if a.2 == "alive" {
-            matrix[a.0, a.1] = Cell(state: CellState.Alive)
+            matrix[a.0, a.1] = Cell(state: CellState.alive)
         }
         else if a.2 == "dead" {
-            matrix[a.0, a.1] = Cell(state: CellState.Dead)
+            matrix[a.0, a.1] = Cell(state: CellState.dead)
         }
         else {
-            matrix[a.0, a.1] = Cell(state: CellState.Unaffected)
+            matrix[a.0, a.1] = Cell(state: CellState.unaffected)
         }
     }
     return matrix
 }
 
-public class GameBoard<MatrixType: Matrix> {
-    public let matrix: MatrixType
+open class GameBoard<MatrixType: Matrix> {
+    open let matrix: MatrixType
     let aliveRuleSet: Array<Rule>
     let deadRuleSet:  Array<Rule>
 
@@ -36,25 +36,25 @@ public class GameBoard<MatrixType: Matrix> {
         self.deadRuleSet = deadRuleSet
     }
     
-    public func applyRules(index: SparseIndex) -> CellState {
+    open func applyRules(_ index: SparseIndex) -> CellState {
         var state:CellState
         if let cell = matrix[index.row, index.col] {
             state = cell.state
         }
         else {
-            state = CellState.Dead
+            state = CellState.dead
         }
         
-        var rules = state == CellState.Alive ? aliveRuleSet : deadRuleSet
+        var rules = state == CellState.alive ? aliveRuleSet : deadRuleSet
         var numAlive = Rule().aliveNeighbors(index, matrix: matrix)
         
         for rule in rules {
             var ruling = rule.apply(index, matrix: matrix, numAliveNeighbors: numAlive)
-            if ruling != CellState.Unaffected {
+            if ruling != CellState.unaffected {
                 return ruling
             }
         }
 
-        return CellState.Dead
+        return CellState.dead
     }
 }

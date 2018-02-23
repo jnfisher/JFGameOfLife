@@ -28,20 +28,20 @@ class JFGameOfLifeEngineTests: XCTestCase {
         
         var next = subject.step()
     
-        XCTAssert(next.matrix[0, 0]?.state == CellState.Alive)
-        XCTAssert(next.matrix[0, 1]?.state == CellState.Alive)
+        XCTAssert(next.matrix[0, 0]?.state == CellState.alive)
+        XCTAssert(next.matrix[0, 1]?.state == CellState.alive)
         
 
-        XCTAssert(next.matrix[1, 1]?.state == CellState.Alive)
-        XCTAssert(next.matrix[1, 0]?.state == CellState.Alive)
+        XCTAssert(next.matrix[1, 1]?.state == CellState.alive)
+        XCTAssert(next.matrix[1, 0]?.state == CellState.alive)
         
         subject.swap(next)
         next = subject.step()
-        XCTAssert(next.matrix[0, 0]?.state == CellState.Alive)
-        XCTAssert(next.matrix[0, 1]?.state == CellState.Alive)
+        XCTAssert(next.matrix[0, 0]?.state == CellState.alive)
+        XCTAssert(next.matrix[0, 1]?.state == CellState.alive)
         
-        XCTAssert(next.matrix[1, 1]?.state == CellState.Alive)
-        XCTAssert(next.matrix[1, 0]?.state == CellState.Alive)
+        XCTAssert(next.matrix[1, 1]?.state == CellState.alive)
+        XCTAssert(next.matrix[1, 0]?.state == CellState.alive)
     }
     
     
@@ -50,8 +50,8 @@ class JFGameOfLifeEngineTests: XCTestCase {
         subject.swap(GameBoard(matrix: buildMatrix(state), aliveRuleSet: ConwaysRules.aliveRuleset, deadRuleSet: ConwaysRules.deadRuleset))
         
         var next = subject.step()
-        XCTAssert(next.matrix[0,0]?.state == CellState.Dead)
-        XCTAssert(next.matrix[1,0]?.state == CellState.Dead)
+        XCTAssert(next.matrix[0,0]?.state == CellState.dead)
+        XCTAssert(next.matrix[1,0]?.state == CellState.dead)
     }
     
     func testDeadCellsPersist() {
@@ -59,7 +59,7 @@ class JFGameOfLifeEngineTests: XCTestCase {
         subject.swap(GameBoard(matrix: buildMatrix(state), aliveRuleSet: ConwaysRules.aliveRuleset, deadRuleSet: ConwaysRules.deadRuleset))
         
         var next = subject.step()
-        XCTAssert(next.matrix[0,0]?.state == CellState.Dead)
+        XCTAssert(next.matrix[0,0]?.state == CellState.dead)
         XCTAssert(next.matrix.count == 1)
     }
     
@@ -73,24 +73,24 @@ class JFGameOfLifeEngineTests: XCTestCase {
         var next = subject.step()
         subject.swap(next)
         // * * *
-        XCTAssert(next.matrix[0, 0]?.state == CellState.Alive)
-        XCTAssert(next.matrix[0,-1]?.state == CellState.Alive)
-        XCTAssert(next.matrix[0, 1]?.state == CellState.Alive)
+        XCTAssert(next.matrix[0, 0]?.state == CellState.alive)
+        XCTAssert(next.matrix[0,-1]?.state == CellState.alive)
+        XCTAssert(next.matrix[0, 1]?.state == CellState.alive)
         
         next = subject.step()
         subject.swap(next)
         // *
         // *
         // *
-        XCTAssert(next.matrix[0, 0]?.state == CellState.Alive)
-        XCTAssert(next.matrix[-1,0]?.state == CellState.Alive)
-        XCTAssert(next.matrix[1, 0]?.state == CellState.Alive)
+        XCTAssert(next.matrix[0, 0]?.state == CellState.alive)
+        XCTAssert(next.matrix[-1,0]?.state == CellState.alive)
+        XCTAssert(next.matrix[1, 0]?.state == CellState.alive)
         
         next = subject.step()
         subject.swap(next)
         // * * *
-        XCTAssert(next.matrix[0, 0]?.state == CellState.Alive)
-        XCTAssert(next.matrix[0,-1]?.state == CellState.Alive)
-        XCTAssert(next.matrix[0, 1]?.state == CellState.Alive)
+        XCTAssert(next.matrix[0, 0]?.state == CellState.alive)
+        XCTAssert(next.matrix[0,-1]?.state == CellState.alive)
+        XCTAssert(next.matrix[0, 1]?.state == CellState.alive)
     }
 }

@@ -14,26 +14,26 @@ public struct ConwaysRules {
     public static let deadRuleset  = [ExactlyThreeLiveNeighbors()]
 }
 
-public class FewerThanTwoLiveNeighbors : Rule {
-    public override func apply(index: SparseIndex, matrix: Matrix, numAliveNeighbors: Int) -> CellState {
-        return numAliveNeighbors < 2 ? CellState.Dead : CellState.Unaffected
+open class FewerThanTwoLiveNeighbors : Rule {
+    open override func apply(_ index: SparseIndex, matrix: Matrix, numAliveNeighbors: Int) -> CellState {
+        return numAliveNeighbors < 2 ? CellState.dead : CellState.unaffected
     }
 }
 
-public class TwoOrThreeLiveNeighbors : Rule {
-    public override func apply(index: SparseIndex, matrix: Matrix, numAliveNeighbors: Int) -> CellState {
-        return numAliveNeighbors == 2 || numAliveNeighbors == 3 ? CellState.Alive : CellState.Unaffected
+open class TwoOrThreeLiveNeighbors : Rule {
+    open override func apply(_ index: SparseIndex, matrix: Matrix, numAliveNeighbors: Int) -> CellState {
+        return numAliveNeighbors == 2 || numAliveNeighbors == 3 ? CellState.alive : CellState.unaffected
     }
 }
 
-public class MoreThanThreeLiveNeighbors : Rule {
-    public override func apply(index: SparseIndex, matrix: Matrix, numAliveNeighbors: Int) -> CellState {
-        return numAliveNeighbors > 3 ? CellState.Dead : CellState.Unaffected
+open class MoreThanThreeLiveNeighbors : Rule {
+    open override func apply(_ index: SparseIndex, matrix: Matrix, numAliveNeighbors: Int) -> CellState {
+        return numAliveNeighbors > 3 ? CellState.dead : CellState.unaffected
     }
 }
 
-public class ExactlyThreeLiveNeighbors : Rule {
-    public override func apply(index: SparseIndex, matrix: Matrix, numAliveNeighbors: Int) -> CellState {
-        return numAliveNeighbors == 3 ? CellState.Alive : CellState.Unaffected
+open class ExactlyThreeLiveNeighbors : Rule {
+    open override func apply(_ index: SparseIndex, matrix: Matrix, numAliveNeighbors: Int) -> CellState {
+        return numAliveNeighbors == 3 ? CellState.alive : CellState.unaffected
     }
 }

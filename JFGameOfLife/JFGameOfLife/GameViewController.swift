@@ -12,18 +12,21 @@ import JFSparseMatrix
 import JFGameOfLifeEngine
 
 extension SKNode {
-    class func unarchiveFromFile(file : NSString) -> SKNode? {
-        if let path = NSBundle.mainBundle().pathForResource(file, ofType: "sks") {
-            var sceneData = NSData(contentsOfFile: path, options: .DataReadingMappedIfSafe, error: nil)!
-            var archiver = NSKeyedUnarchiver(forReadingWithData: sceneData)
+    class func unarchiveFromFile(_ file : NSString) -> SKNode? {
+        if let url = Bundle.main.url(forResource: file as String, withExtension: "sks") {
+            let sceneData = try? Data(contentsOf: url, options: .mappedIfSafe)
             
-            archiver.setClass(self.classForKeyedUnarchiver(), forClassName: "SKScene")
-            let scene = archiver.decodeObjectForKey(NSKeyedArchiveRootObjectKey) as GameScene
-            archiver.finishDecoding()
-            return scene
-        } else {
-            return nil
+            if sceneData != nil {
+                let archiver = NSKeyedUnarchiver(forReadingWith: sceneData!)
+                
+                archiver.setClass(self.classForKeyedUnarchiver(), forClassName: "SKScene")
+                let scene = archiver.decodeObject(forKey: NSKeyedArchiveRootObjectKey) as! GameScene
+                archiver.finishDecoding()
+                return scene
+            }
         }
+        
+        return nil
     }
 }
 
@@ -33,7 +36,7 @@ class GameViewController: UIViewController {
 
         if let scene = GameScene.unarchiveFromFile("GameScene") as? GameScene {
             // Configure the view.
-            let skView = self.view as SKView
+            let skView = self.view as! SKView
             skView.showsFPS = true
             skView.showsNodeCount = true
             
@@ -41,38 +44,42 @@ class GameViewController: UIViewController {
             skView.ignoresSiblingOrder = true
             
             /* Set the scale mode to scale to fit the window */
-            scene.scaleMode = .AspectFit
+            scene.scaleMode = .aspectFit
+//            scene.anchorPoint = CGPoint(x: 0.25, y: 0.25)
             
-                if let importedBoard = RLEReader().buildBoard("gosper-glider-gun") {
-                    scene.engine.swap(importedBoard)
-                }
-                else {
-                    scene.engine.swap(GameBoard(matrix: Matrix(), aliveRuleSet: [], deadRuleSet: []))
-                }
-            
+            if let board = RLEReader().buildBoard("sidecargun") {
+                let cols  = (board.matrix.maxCol - board.matrix.minCol)
+                let rows = (board.matrix.maxRow - board.matrix.minRow)
+                scene.size = CGSize(width: rows, height: cols)
+                scene.engine.swap(board)
+            }
+            else {
+                scene.engine.swap(GameBoard(matrix: Matrix(), aliveRuleSet: [], deadRuleSet: []))
+            }
+        
             
             skView.presentScene(scene)
         }
     }
 
-    override func shouldAutorotate() -> Bool {
+    override var shouldAutorotate : Bool {
         return true
     }
 
-    override func supportedInterfaceOrientations() -> Int {
-        if UIDevice.currentDevice().userInterfaceIdiom == .Phone {
-            return Int(UIInterfaceOrientationMask.AllButUpsideDown.rawValue)
-        } else {
-            return Int(UIInterfaceOrientationMask.All.rawValue)
-        }
-    }
+//    override func supportedInterfaceOrientations() -> Int {
+//        if UIDevice.current.userInterfaceIdiom == .phone {
+//            return Int(UIInterfaceOrientationMask.allButUpsideDown.rawValue)
+//        } else {
+//            return Int(UIInterfaceOrientationMask.all.rawValue)
+//        }
+//    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Release any cached data, images, etc that aren't in use.
     }
 
-    override func prefersStatusBarHidden() -> Bool {
+    override var prefersStatusBarHidden : Bool {
         return true
     }
 }

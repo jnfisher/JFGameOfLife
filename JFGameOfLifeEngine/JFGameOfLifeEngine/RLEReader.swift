@@ -9,87 +9,91 @@
 import Foundation
 
 
-public class RLEReader {
+open class RLEReader<MatrixType: Matrix> {
     public init() {}
     
-    public func buildBoard<MatrixType: Matrix>(file: NSString) -> GameBoard<MatrixType>? {
-        var bundle = NSBundle.mainBundle()
-        var matrix = MatrixType()
-        
-        if let fileName = bundle.pathForResource(file, ofType: "lif") {
-            var error: NSError?
-            if let fileContents = NSString(contentsOfFile: fileName, encoding: NSUTF8StringEncoding, error: &error) {
-                var fileString = fileContents as String
-                if let rng = "\\n[ob0-9!$]".firstMatch(fileString) {
-                    let si = advance(fileString.startIndex, rng.0.location)
-                    fileString = fileString.substringWithRange(Range<String.Index>(start: si, end: fileString.endIndex))
-                }
-                else {
-                    return nil
-                }
-                
-                let encoding = fileString.stringByReplacingOccurrencesOfString("\n", withString: "")
-                let rowEncodings = encoding.componentsSeparatedByString("$")
-                for (currentRow, rowEncoding) in enumerate(rowEncodings) {
-//                    print(rowEncoding + ":")
-
-                    var repeats = "\\d+".exec(rowEncoding)
-                    if repeats.count == 0 || repeats[0].0.location > 0 {
-                        repeats = [(NSRange(location: 0, length: 0), "1")] + repeats
-                    }
-                    
-                    var currentColumn = 0
-                    for (index, repeat) in enumerate(repeats) {
-                        var repeatCount = repeat.1.toInt()!
-//                        print("\(repeatCount)-")
-                        
-                        let substringStartIndex = advance(rowEncoding.startIndex, repeat.0.location+repeat.0.length)
-                        let substringEndIndex = (index == repeats.count-1) ?
-                                rowEncoding.endIndex :
-                                advance(rowEncoding.startIndex, repeats[index+1].0.location)
-                        let cells = rowEncoding.substringWithRange(
-                            Range<String.Index>(start: substringStartIndex, end: substringEndIndex))
-                        
-//                        print(cells + ", ")
-                        for (charIndex, char) in enumerate(cells) {
-                            if charIndex == 0 {
-                                if char == "b" {
-                                    currentColumn += repeatCount
-                                }
-                                else if char == "o" {
-                                    for i in 0..<repeatCount {
-//                                        print("(\(currentRow), \(currentColumn)) ")
-                                        matrix[currentColumn++, currentRow] = Cell(state: CellState.Alive)
-                                    }
-                                }
-                                
-                                continue
-                            }
-                            else {
-                                if char == "o" {
-//                                    print("(\(currentRow), \(currentColumn)) ")
-                                    matrix[currentColumn++, currentRow] = Cell(state: CellState.Alive)
-                                }
-                                else if char == "b" {
-                                    currentColumn++
-                                }
-                            }
-                        }
-                        
-                        
-                    }
-//                    println()
-                }
-            }
-            else if error != nil {
-                println(error.debugDescription)
-                return nil
-            }
-            
-            return GameBoard<MatrixType>(matrix: matrix, aliveRuleSet: ConwaysRules.aliveRuleset, deadRuleSet: ConwaysRules.deadRuleset)
+    open func buildBoard(_ file: String) -> GameBoard<MatrixType>? {
+        guard let fileURL = Bundle.main.url(forResource: file, withExtension: "lif") else {
+            // File not found
+            return nil
         }
         
+        guard let fileString = try? String(contentsOf: fileURL, encoding: .utf8) else {
+            // Unable to read file as string
+            return nil
+        }
         
-        return nil
+        guard let range = fileString.range(of:"\\n[ob0-9!$]", options: .regularExpression) else {
+            // Unable to find start of encoding
+            return nil
+        }
+        
+        let rleEncoding = fileString.substring(from: range.lowerBound).replacingOccurrences(of: "\n", with: "")
+        let matrix = parseBoard(rleEncoding: rleEncoding)
+        
+        return GameBoard<MatrixType>(matrix: matrix, aliveRuleSet: ConwaysRules.aliveRuleset, deadRuleSet: ConwaysRules.deadRuleset)
+    }
+    
+    func parseBoard(rleEncoding: String) -> MatrixType {
+        let matrix = MatrixType()
+        var currentRow = 0, currentColumn = 0
+        for runCount in matches(for: "([ob]|\\d+[ob]|\\d+\\$|\\$)", in: rleEncoding) {
+            print("\(runCount.1.location), \(runCount.1.length): \(runCount.0)")
+            
+            if let repeatRange = runCount.0.range(of:"\\d+", options: .regularExpression) {
+                // Repeated o, b or $
+                let indexRepeatStart = repeatRange.lowerBound
+                let indexRepeatEnd   = repeatRange.upperBound
+                
+                let repeatStr = runCount.0[indexRepeatStart..<indexRepeatEnd]
+                let cellValue = String(runCount.0[indexRepeatEnd...])
+                
+                if let numRepeats = Int(repeatStr) {
+                    print("pulled repeats: \(numRepeats)")
+                    if cellValue == "$" {
+                        currentRow   += 1
+                        currentColumn = 0
+                    } else {
+                        for _ in 0 ..< numRepeats {
+                            addCell(column: currentColumn, row: currentRow, withType: cellValue, toMatrix: matrix)
+                            currentColumn += 1
+                        }
+                    }
+                }
+            } else {
+                // lone $, b or o
+                let cellValue = runCount.0
+                if cellValue == "$" {
+                    currentRow   += 1
+                    currentColumn = 0
+                } else {
+                    addCell(column: currentColumn, row: currentRow, withType: cellValue, toMatrix: matrix)
+                    currentColumn += 1
+                }
+            }
+        }
+        
+        return matrix
+    }
+    
+    func addCell(column: Int, row: Int, withType: String, toMatrix: MatrixType) {
+        if withType == "o" {
+            toMatrix[column, row] = Cell(state: CellState.alive)
+        } else {
+            toMatrix[column, row] = Cell(state: CellState.dead)
+        }
+    }
+    
+    func matches(for regex: String, in text: String) -> [(String, NSRange)] {
+        
+        do {
+            let regex = try NSRegularExpression(pattern: regex)
+            let nsString = text as NSString
+            let results = regex.matches(in: text, range: NSRange(location: 0, length: nsString.length))
+            return results.map { (nsString.substring(with: $0.range), $0.range) }
+        } catch let error {
+            print("invalid regex: \(error.localizedDescription)")
+            return []
+        }
     }
 }

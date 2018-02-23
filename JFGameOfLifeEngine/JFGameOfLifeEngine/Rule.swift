@@ -10,25 +10,25 @@ import Foundation
 import JFSparseMatrix
 
 public enum CellState {
-    case Unaffected
-    case Dead
-    case Alive
+    case unaffected
+    case dead
+    case alive
 }
 
 public protocol ApplicableRule {
-    func apply(index: SparseIndex, matrix: Matrix, numAliveNeighbors: Int) -> CellState
+    func apply(_ index: SparseIndex, matrix: Matrix, numAliveNeighbors: Int) -> CellState
 }
 
-public class Rule : ApplicableRule {
-    public func apply(index: SparseIndex, matrix: Matrix, numAliveNeighbors: Int) -> CellState {
-        return CellState.Unaffected
+open class Rule : ApplicableRule {
+    open func apply(_ index: SparseIndex, matrix: Matrix, numAliveNeighbors: Int) -> CellState {
+        return CellState.unaffected
     }
     
-    func aliveNeighbors(index: SparseIndex, matrix: Matrix) -> Int {
+    func aliveNeighbors(_ index: SparseIndex, matrix: Matrix) -> Int {
         return index.moore.reduce(0, {
             if let data = matrix[$1.0, $1.1] {
                 let cell = data as Cell
-                if cell.state == CellState.Alive {
+                if cell.state == CellState.alive {
                     return $0 + 1
                 }
             }

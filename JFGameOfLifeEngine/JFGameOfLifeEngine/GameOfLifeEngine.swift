@@ -9,18 +9,18 @@
 import Foundation
 import JFSparseMatrix
 
-public class Cell : Printable {
-    public let state = CellState.Unaffected
+open class Cell : CustomStringConvertible {
+    open var state = CellState.unaffected
     public init(state: CellState) {
         self.state = state
     }
     
-    public var description: String {
+    open var description: String {
         get {
-            if self.state == CellState.Alive {
+            if self.state == CellState.alive {
                 return "alive"
             }
-            else if self.state == CellState.Dead {
+            else if self.state == CellState.dead {
                 return "dead"
             }
             else {
@@ -37,8 +37,8 @@ extension SparseMatrix {
     
 }
 
-public class GameOfLifeEngine {
-    public var currentBoard:GameBoard<Matrix>
+open class GameOfLifeEngine {
+    open var currentBoard:GameBoard<Matrix>
     
     public init(initialBoard: GameBoard<Matrix>) {
         self.currentBoard = initialBoard
@@ -48,38 +48,37 @@ public class GameOfLifeEngine {
         self.currentBoard = GameBoard(matrix: Matrix(), aliveRuleSet: ConwaysRules.aliveRuleset, deadRuleSet: ConwaysRules.deadRuleset)
     }
     
-    public func step() -> GameBoard<Matrix> {
-        var nextBoard = Matrix(array: processedCurrentlyAliveCells + processedLiveNeighboringCells)
+    open func step() -> GameBoard<Matrix> {
+        let nextBoard = Matrix(array: processedCurrentlyAliveCells + processedLiveNeighboringCells)
         return GameBoard<Matrix>(matrix: nextBoard, aliveRuleSet: currentBoard.aliveRuleSet, deadRuleSet: currentBoard.deadRuleSet)
     }
     
-    public func swap(newBoard: GameBoard<Matrix>) {
+    open func swap(_ newBoard: GameBoard<Matrix>) {
         self.currentBoard = newBoard
     }
     
-    public var processedCurrentlyAliveCells: Array<(Int, Int, Cell)> {
+    open var processedCurrentlyAliveCells: Array<(Int, Int, Cell)> {
         get {
-            var cells = filter(map(currentBoard.matrix, { (key, cell) -> (Int, Int, Cell) in
-                if cell.state == CellState.Alive {
+            let cells = currentBoard.matrix.map { (key, cell) -> (Int, Int, Cell) in
+                if cell.state == CellState.alive {
                     return (key.row, key.col, Cell(state: self.currentBoard.applyRules(key)))
                 }
                 else {
-                    return (key.row, key.col, Cell(state: CellState.Unaffected))
+                    return (key.row, key.col, Cell(state: CellState.unaffected))
                 }
-            }), { $0.2.state != CellState.Unaffected })
+            }
             
-            return cells
+            return cells.filter { $0.2.state != CellState.unaffected }
         }
     }
     
-    public var processedLiveNeighboringCells: Array<(Int, Int, Cell)> {
+    open var processedLiveNeighboringCells: Array<(Int, Int, Cell)> {
         get {
-            var processedCellCache = Matrix()
-            
+            let processedCellCache = Matrix()
             for (index, cell) in currentBoard.matrix {
-                if cell.state == CellState.Alive {
+                if cell.state == CellState.alive {
                     for (row, col) in index.moore {
-                        if currentBoard.matrix[row, col]?.state == CellState.Alive {
+                        if currentBoard.matrix[row, col]?.state == CellState.alive {
                             // skip currently alive cells, they were already processed
                             continue
                         }
@@ -91,9 +90,11 @@ public class GameOfLifeEngine {
                 }
             }
             
-            return filter(map(processedCellCache, { (key, cell) -> (Int, Int, Cell) in
+            let cells = processedCellCache.map { (key, cell) -> (Int, Int, Cell) in
                 return (key.row, key.col, cell)
-            }), { $0.2.state == CellState.Alive })
+            }
+            
+            return cells.filter { $0.2.state == CellState.alive }
         }
     }
 }

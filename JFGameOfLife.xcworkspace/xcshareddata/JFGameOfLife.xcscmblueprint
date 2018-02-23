@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "89E5E039687B2FF79E31463B73BB8F2F98E37B97",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "36B114532E9439220E418126ACD707E70C2243C2" : 9223372036854775807,
+    "89E5E039687B2FF79E31463B73BB8F2F98E37B97" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "052CF312-3306-411C-88AD-697CAF9AD73C",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "36B114532E9439220E418126ACD707E70C2243C2" : "JFSparseMatrix\/",
+    "89E5E039687B2FF79E31463B73BB8F2F98E37B97" : "JFGameOfLife\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "JFGameOfLife",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "JFGameOfLife.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/jnfisher\/JFSparseMatrix.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "36B114532E9439220E418126ACD707E70C2243C2"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/jnfisher\/JFGameOfLife.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "89E5E039687B2FF79E31463B73BB8F2F98E37B97"
+    }
+  ]
+}

@@ -56,7 +56,7 @@ class SparseMatrixTests: XCTestCase {
         var count = 0
         for (key, value) in subject {
             XCTAssert(value == 222)
-            count++
+            count += 1
         }
         
         XCTAssert(count == 5, "\(subject.count) should be 5")

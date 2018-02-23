@@ -8,13 +8,13 @@
 
 import Foundation
 
-public class SparseMatrix<T: Printable> : SequenceType, Printable {
+open class SparseMatrix<T: CustomStringConvertible> : Sequence, CustomStringConvertible {
     var matrix: [SparseIndex: T] = [:]
     
-    public var minRow = Int.max
-    public var minCol = Int.max
-    public var maxRow = Int.min
-    public var maxCol = Int.min
+    open var minRow = Int.max
+    open var minCol = Int.max
+    open var maxRow = Int.min
+    open var maxCol = Int.min
     
     public required init() {}
     
@@ -24,7 +24,7 @@ public class SparseMatrix<T: Printable> : SequenceType, Printable {
         }
     }
     
-    public subscript(row: Int, column: Int) -> T? {
+    open subscript(row: Int, column: Int) -> T? {
         get {
             return matrix[SparseIndex(row: row, col: column)]
         }
@@ -34,17 +34,17 @@ public class SparseMatrix<T: Printable> : SequenceType, Printable {
         }
     }
     
-    public func generate() -> DictionaryGenerator<SparseIndex, T> {
-        return matrix.generate()
+    open func makeIterator() -> DictionaryIterator<SparseIndex, T> {
+        return matrix.makeIterator()
     }
     
-    public var count: Int {
+    open var count: Int {
         get {
             return matrix.count
         }
     }
     
-    public var description: String {
+    open var description: String {
         get {
             var str = ""
             for (index, data) in matrix {
@@ -54,7 +54,7 @@ public class SparseMatrix<T: Printable> : SequenceType, Printable {
         }
     }
     
-    private func updateMinMax(row: Int, column: Int) -> Void {
+    fileprivate func updateMinMax(_ row: Int, column: Int) -> Void {
         if row > maxRow {
             maxRow = row
         }
